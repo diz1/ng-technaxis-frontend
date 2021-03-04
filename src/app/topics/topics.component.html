@@ -1,0 +1,14 @@
+<div class="container-fluid align-items-center my-1 px-1">
+  <nav class="nav nav-pills nav-fill justify-content-between" *ngIf="photosService.topicList.length">
+    <a class="nav-link text-center" routerLinkActive="active" [routerLink]="'home'">Home</a>
+    <a class="nav-link text-center"
+       routerLinkActive="active"
+       *ngFor="let topic of photosService.topicList"
+       [routerLink]="'/q/' + topic.title | lowercase"
+       (click)="goSearchPhotos(topic.title.toLowerCase())"
+    >
+      {{ topic.title }}
+    </a>
+  </nav>
+  <div *ngIf="topicsLoading">Loading...</div>
+</div>

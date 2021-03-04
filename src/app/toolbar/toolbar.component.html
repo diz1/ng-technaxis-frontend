@@ -7,19 +7,14 @@
       </div>
 
       <div class="col-auto">
-        <a class="display-6 stretched-link text-decoration-none text-reset" href="#" title="Go to home page">{{ title }}</a>
+        <a class="display-6 stretched-link text-decoration-none text-reset" [routerLink]="'home'" title="Go to home page">Photos</a>
       </div>
 
     </div>
   </div>
 
   <div class="col">
-    <label class="visually-hidden" for="specificSizeInputGroupUsername">Search</label>
-
-    <div class="input-group input-group-sm">
-      <input type="text" class="form-control" id="specificSizeInputGroupUsername" placeholder="Search...">
-      <button class="btn btn-primary input-group-text btn-sm">Go</button>
-    </div>
+    <app-search></app-search>
   </div>
 
   <div class="col-2">

@@ -1,18 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PhotosService } from '../shared/photos.service';
 
 @Component({
   selector: 'app-intro',
   templateUrl: './intro.component.html',
-  styles: [
-  ]
+  styleUrls: []
 })
 export class IntroComponent implements OnInit {
+  introPhotoLoading = true;
 
-  @Input() title: string;
-
-  constructor() { }
+  constructor(public photosService: PhotosService) { }
 
   ngOnInit(): void {
+    this.photosService.fetchRandomPhoto().subscribe(() => {
+      this.introPhotoLoading = false;
+    });
   }
 
 }

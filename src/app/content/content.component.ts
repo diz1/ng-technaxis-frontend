@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { PhotosService } from '../shared/photos.service';
+import {Component, OnInit, ViewChild, TemplateRef} from '@angular/core';
+import {Photo, PhotosService} from '../shared/photos.service';
 
 @Component({
   selector: 'app-content',
@@ -8,13 +8,26 @@ import { PhotosService } from '../shared/photos.service';
   ]
 })
 export class ContentComponent implements OnInit {
-
-  @Input() title: string;
+  @ViewChild('button') button: TemplateRef<any>;
+  @ViewChild('photoModal') photoModal: any;
+  contentLoading = true;
+  test = [];
 
   constructor(public photoService: PhotosService) { }
 
-  async ngOnInit(): Promise<void> {
-    await this.photoService.fetchPhotos();
+  ngOnInit(): void {
+    if (this.photoService.queryToSearch) {
+      this.contentLoading = false;
+      return;
+    }
+    this.photoService.fetchPhotos().subscribe(() => {
+      this.contentLoading = false;
+    });
+  }
+
+  openModal(photo: Photo): void {
+    this.photoService.photo = photo;
+    this.photoModal.modalService.openPhotoModal(this.photoModal.photo);
   }
 
 }

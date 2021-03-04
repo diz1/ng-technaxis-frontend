@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { PhotosService } from '../shared/photos.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,12 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
   ]
 })
 export class ToolbarComponent implements OnInit {
-
-  @Input() title: string;
-
-  constructor() { }
+  constructor(public photosService: PhotosService) { }
 
   ngOnInit(): void {
   }
-
 }

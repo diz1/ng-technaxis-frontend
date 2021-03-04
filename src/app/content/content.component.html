@@ -1,9 +1,41 @@
 <div class="container">
-  <div class="row row-cols-5">
-    <div class="col p-3" *ngFor="let photo of photoService.photosList">
-      <a [href]="photo.user.links.html">
-        <img class="rounded img-thumbnail" [src]="photo.urls.small" alt="...">
-      </a>
+  <div class="row row-cols-4 g-4">
+    <div *ngIf="contentLoading">Loading...</div>
+    <div class="col pt-3" *ngFor="let photo of photoService.photosList">
+      <div class="card h-100 position-relative">
+        <img
+          (click)="openModal(photo)"
+          [src]="photo.urls.small"
+          class="card-img-top"
+          [alt]="photo.alt_description"
+          height="300px"
+          style="object-fit: cover; cursor: zoom-in"
+          data-bs-toggle="modal"
+          data-bs-target="#photoModal"
+        >
+        <button class="btn btn-primary position-absolute border top-0 left-0 mt-2 ms-2 d-flex align-items-center justify-content-between">
+          <small class="material-icons md-18 me-2">thumb_up_alt</small>
+          <small> {{ photo.likes }} </small>
+        </button>
+        <div class="card-body">
+          <h5 class="card-title">
+            <img class="img rounded-circle" [src]="photo.user.profile_image.small" [alt]="photo.user.name" width="32px" height="32px">
+            {{ photo.user.name }}
+          </h5>
+          <p class="card-text">{{ photo.description }}</p>
+          <small *ngIf="!photo.description" class="text-muted">No description...</small>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <div class="col-6 text-start text-truncate" [title]="'Created at ' + (photo.created_at | date: 'dd MMMM, y')">
+            <small class="text-muted">Created at {{ photo.created_at | date:'dd.MM.yyyy' }}</small>
+          </div>
+          <div class="col-6 text-end text-truncate" [title]="'Go to user profile - @'+photo.user.username">
+            <a [href]="photo.user.links.html" class="text-muted">@{{ photo.user.username }}</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<app-modal #photoModal></app-modal>

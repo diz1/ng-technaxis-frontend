@@ -1,0 +1,11 @@
+<div class="input-group input-group-sm">
+  <input [(ngModel)]="photosService.queryToSearch" type="text" class="form-control" placeholder="Search...">
+  <button
+    class="btn btn-primary input-group-text btn-sm"
+    type="button"
+    [routerLink]="'/q/' + photosService.queryToSearch"
+    (click)="goSearchPhotos()"
+  >
+    Go
+  </button>
+</div>

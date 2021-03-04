@@ -1,19 +1,20 @@
-<div class="card p-0 m-0 border-0 bg-dark text-white">
-  <a href="#">
-    <img class="card-img rounded-0" style="max-height: 550px; object-fit: cover" src="https://sakhalife.ru/wp-content/uploads/2020/06/index-2.jpg" alt="Deer">
+<div class="card p-0 m-0 border-0 bg-dark text-white rounded-0">
+  <a href="#" class="">
+    <img *ngIf="!introPhotoLoading" class="card-img rounded-0" style="max-height: 550px; object-fit: cover" [src]="photosService.introPhoto.urls.regular" alt="Deer">
+    <div *ngIf="introPhotoLoading" class="row align-items-center justify-content-center m-0" style="height: 550px; max-height: 550px;">
+      <div class="col-auto">
+        <div class="spinner-grow me-4"></div>
+        <div class="spinner-grow me-4"></div>
+        <div class="spinner-grow"></div>
+      </div>
+    </div>
   </a>
   <div class="card-img-overlay row align-items-center justify-content-center p-0 m-0">
     <div class="col-7">
-      <h5 class="display-6 card-title">{{ title }}</h5>
+      <h5 class="display-6 card-title">Just search...</h5>
       <p class="card-text">The internet’s source of freely-usable images.
         Powered by creators everywhere.</p>
-
-      <label class="visually-hidden" for="introSearch">Search</label>
-
-      <div class="input-group input-group-sm">
-        <input type="text" class="form-control" id="introSearch" placeholder="Search...">
-        <button class="btn btn-primary input-group-text btn-sm">Go</button>
-      </div>
+      <app-search></app-search>
     </div>
   </div>
 </div>
