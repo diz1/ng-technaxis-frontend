@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row row-cols-5">
+    <div class="col p-3" *ngFor="let photo of photoService.photosList">
+      <a [href]="photo.user.links.html">
+        <img class="rounded img-thumbnail" [src]="photo.urls.small" alt="...">
+      </a>
+    </div>
+  </div>
+</div>
