@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {PhotosService} from '../shared/photos.service';
 
 @Component({
@@ -6,14 +6,8 @@ import {PhotosService} from '../shared/photos.service';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent {
 
   constructor(public photosService: PhotosService) { }
-
-  ngOnInit(): void {
-    // if (this.photosService.queryToSearch) { return; }
-    // // @ts-ignore
-    // this.photosService.fetchPhotosByQuery(this.activeRoute.params).subscribe();
-  }
 
 }

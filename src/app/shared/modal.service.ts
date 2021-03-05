@@ -14,8 +14,7 @@ export class ModalService {
   constructor(private modalService: BsModalService, public photoService: PhotosService) {}
 
   openPhotoModal(template: TemplateRef<any>): void {
-    // tslint:disable-next-line:variable-name
-    const _combine = combineLatest(
+    const combine = combineLatest(
       this.modalService.onShow,
       this.modalService.onShown,
       this.modalService.onHide,
@@ -33,7 +32,7 @@ export class ModalService {
       })
     );
     this.subscriptions.push(
-      this.modalService.onHide.subscribe((reason: string | any) => {
+      this.modalService.onHide.subscribe(() => {
         // onHide logic
       })
     );
@@ -47,7 +46,7 @@ export class ModalService {
       })
     );
 
-    this.subscriptions.push(_combine);
+    this.subscriptions.push(combine);
 
     this.photoModalRef = this.modalService.show(template, {
       id: 1,

@@ -1,8 +1,8 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {tap} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface Photo {
   id: string;
@@ -21,6 +21,12 @@ export interface Photo {
   created_at: string;
   liked_by_user: boolean;
   likes: number;
+  links: {
+    download: string;
+    html: string;
+    download_location: string;
+    self: string;
+  };
   user: {
     id: string
     username: string;
@@ -56,9 +62,10 @@ export class PhotosService {
 
   constructor(private http: HttpClient) {}
 
-  fetchPhotos(): Observable<Photo[]> {
-    return this.http.get<Photo[]>(`https://api.unsplash.com/photos?client_id=${environment.accessApiKey}&order_by=latest`)
-      .pipe(tap(source => this.photosList = source));
+  fetchPhotos(page?: number): Observable<Photo[]> {
+    return this.http
+      .get<Photo[]>(`https://api.unsplash.com/photos?client_id=${environment.accessApiKey}&order_by=latest&per_page=12&page=${page || 1}`)
+      .pipe(tap(source => page ? this.photosList.push(...source) : this.photosList = source));
   }
 
   fetchTopics(): Observable<Topic[]> {
@@ -71,8 +78,8 @@ export class PhotosService {
       .pipe(tap(source => this.introPhoto = source));
   }
 
-  fetchPhotosByQuery(query?: string): Observable<Photo[]> {
-    return this.http.get<any>(`https://api.unsplash.com/search/photos?client_id=${environment.accessApiKey}&query=${query || this.queryToSearch}`)
-      .pipe(tap(({ results }) => this.photosList = results));
+  fetchPhotosByQuery(query?: string, page?: number): Observable<Photo[]> {
+    return this.http.get<any>(`https://api.unsplash.com/search/photos?client_id=${environment.accessApiKey}&query=${query || this.queryToSearch}&per_page=12&page=${page || 1}`)
+      .pipe(tap(({ results }) => page ? this.photosList.push(...results) : this.photosList = results));
   }
 }

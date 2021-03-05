@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PhotosService } from '../shared/photos.service';
 
 @Component({
@@ -6,11 +6,8 @@ import { PhotosService } from '../shared/photos.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   constructor(public photosService: PhotosService) { }
-
-  ngOnInit(): void {
-  }
 
   goSearchPhotos(): void {
     if (!this.photosService.queryToSearch) { return; }
