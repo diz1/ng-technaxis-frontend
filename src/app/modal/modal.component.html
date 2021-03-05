@@ -1,0 +1,98 @@
+<div class="modal fade">
+  <ng-template #photo>
+    <div class="modal-header">
+      <h5 class="modal-title me-2" id="photoModalScrollableTitle">
+        {{ photosService.photo.user.name }}
+      </h5>
+      <a [href]="photosService.photo.user.links.html" class="text-muted text-decoration-none">@{{ photosService.photo.user.username }}</a>
+      <button type="button" class="btn-close" (click)="modalService.closeModal(1)" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="card border-0 mb-4">
+        <img
+          [src]="photosService.photo.urls.regular"
+          [alt]="photosService.photo.alt_description"
+          class="card-img rounded-3"
+          style="object-fit: contain; max-height: 650px"
+        >
+      </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+      <div class="col-auto">
+        <button class="btn btn-primary d-inline-flex align-items-center justify-content-between me-2">
+          <small class="material-icons md-18 me-2">thumb_up_alt</small>
+          <small> {{ photosService.photo.likes }} </small>
+        </button>
+      <!--        <div class="col-auto">-->
+      <!--          <button type="button" class="btn btn-primary d-inline-flex align-items-center justify-content-between" (click)="modalService.openShareModal(share)">-->
+      <!--            <small class="material-icons md-18 me-2">share</small>-->
+      <!--            <small>Share</small>-->
+      <!--          </button>-->
+      <!--        </div>-->
+      <!--        <div class="col-auto">-->
+      <!--          <button type="button" class="btn btn-primary d-inline-flex align-items-center justify-content-between" (click)="modalService.openInfoModal(info)">-->
+      <!--            <small class="material-icons md-18 me-2">info</small>-->
+      <!--            <small>Info</small>-->
+      <!--          </button>-->
+      <!--        </div>-->
+        <div class="btn-group" dropdown [dropup]="true">
+          <button id="button-dropup" dropdownToggle type="button" class="btn btn-primary dropdown-toggle d-inline-flex align-items-center justify-content-between"
+                  aria-controls="dropdown-dropup">
+            <small class="material-icons md-18 me-2">download</small>
+            <small>Download</small>
+            <span class="caret"></span>
+          </button>
+
+          <ul id="dropdown-dropup" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-dropup">
+            <li role="menuitem">
+              <a class="dropdown-item" [href]="photosService.photo.links.download + '?force=true&w=640'" target="_blank">Width 640px</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" [href]="photosService.photo.links.download + '?force=true&w=1080'">Width 1080px</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" [href]="photosService.photo.links.download + '?force=true&w=2400'">Width 2400px</a>
+            </li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem">
+              <a class="dropdown-item" [href]="photosService.photo.links.download + '?force=true'">Original size ({{ photosService.photo.width }}x{{ photosService.photo.height }})</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-auto">
+        <button type="button" class="btn btn-secondary d-inline-flex align-items-center justify-content-between" (click)="modalService.closeModal(1)">
+          <small>Close</small>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+<!--  <ng-template #share>-->
+<!--    <div class="modal-header">-->
+<!--      <h5 class="modal-title me-2" id="shareModalScrollableTitle"> Поделиться </h5>-->
+<!--      <button type="button" class="btn-close" (click)="modalService.closeModal(2)" aria-label="Close"></button>-->
+<!--    </div>-->
+<!--    <div class="modal-body">-->
+<!--      <p>What follows is just some placeholder text for this modal dialog. You just gotta ignite the light and let it shine! Come just as you are to me. Just own the night like the 4th of July. Infect me with your love and fill me with your poison. Come just as you are to me. End of the rainbow looking treasure.</p>-->
+<!--    </div>-->
+<!--    <div class="modal-footer">-->
+<!--      <button type="button" class="btn btn-secondary" (click)="modalService.closeModal(2)">Close</button>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+
+<!--  <ng-template #info>-->
+<!--    <div class="modal-header">-->
+<!--      <h5 class="modal-title me-2" id="infoModalScrollableTitle"> Инфо </h5>-->
+<!--      <button type="button" class="btn-close" (click)="modalService.closeModal(3)" aria-label="Close"></button>-->
+<!--    </div>-->
+<!--    <div class="modal-body">-->
+<!--      <p>What follows is just some placeholder text for this modal dialog. You just gotta ignite the light and let it shine! Come just as you are to me. Just own the night like the 4th of July. Infect me with your love and fill me with your poison. Come just as you are to me. End of the rainbow looking treasure.</p>-->
+<!--    </div>-->
+<!--    <div class="modal-footer">-->
+<!--      <button type="button" class="btn btn-secondary" (click)="modalService.closeModal(3)">Close</button>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+</div>
